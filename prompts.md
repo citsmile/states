@@ -37,3 +37,11 @@ Also, let's create a seeds file which I will fill out manually later.
 In prisma/fixtures/states and prisma/fixtures/usa-states there are json files which are the source for seeds. Please, write function seed() in seeds.ts that will:
 - take usa-states.json and import its content into table State. It should import population from property population) and name (from property state.
 - for each state in usa-states.json there is a separate json file in prisma/states. Import its data into table County. The mapping is: stateId = state.id, population = property population, name = property county.
+
+# First request
+
+The Home component should contain 3 components: StateList, DuplicateStateList, and StateDetails. StateList should have useEffect that goes to the API (`{BASE_URL}`/api/states`) and hit a server function states which will return all states from table State (id, name, population). In the render section, it should return a list with these states. What's the plan?
+
+Please, also add a test to Home.test.tsx that checks that states are shown (the fetch function needs to be mocked).
+
+And also in the Playwright spec let's check that states are shown (the database needs to be populated with 3 fake states in the setup section).
