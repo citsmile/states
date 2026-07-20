@@ -13,6 +13,11 @@ Github Copilot in the Auto mode was used for auto-complete
 Run the following commands:
 
 * npm install
+* npm run db:test:reset
+* npm run db:test:migrate
 * npm run test:unit
 * npx playwright install
 * npm run test:e2e
+* npm run db:reset
+* npm run db:migrate
+* npm run db:seed

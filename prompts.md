@@ -23,3 +23,17 @@ What's the plan?
 # The first Playwright test
 
 Let's add the first Playwright test that starts the app and checks that the page with title States has appeared.
+
+# Prisma setup
+
+The next step is to initialize Prisma. Prisma will need npm commands in package.json including reset, migrate, and migrate with --create-only flag.
+
+Let's define the schema which will contain tables State and County. Model State will contain id, name, population (integer), and collection Counties. Model County will contain id, stateId, name, population (integer), and  reference to State through stateId.
+
+Also, let's create a seeds file which I will fill out manually later.
+
+# Seeding from fixtures
+
+In prisma/fixtures/states and prisma/fixtures/usa-states there are json files which are the source for seeds. Please, write function seed() in seeds.ts that will:
+- take usa-states.json and import its content into table State. It should import population from property population) and name (from property state.
+- for each state in usa-states.json there is a separate json file in prisma/states. Import its data into table County. The mapping is: stateId = state.id, population = property population, name = property county.
