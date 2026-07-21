@@ -24,6 +24,18 @@ app.get('/states', async (req, res) => {
   res.json(states)
 })
 
+app.get('/states/:id', async (req, res) => {
+  const { id } = req.params
+  const state = await prisma.state.findUnique({
+    where: { id: parseInt(id) },
+    include: { counties: true },
+  })
+  if (!state) {
+    return res.status(404).json({ error: 'State not found' })
+  }
+  res.json(state)
+})
+
 app.use(express.static(path.join(__dirname, '../web/dist')))
 
 app.get('*', (req, res) => {

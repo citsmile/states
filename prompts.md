@@ -49,3 +49,9 @@ And also in the Playwright spec let's check that states are shown (the database 
 # Production-like Playwright
 
 I want to switch Playwright to production mode. Part apps/web should be compiled as a static site. Package.json should contain test:web task that runs a the server in the mode in which calls like api/... are sent to apps/api/server.ts while all other requests are answered by the static React app. The test server should run on port 3001 and use the .env.test environment. How do we achieve this?
+
+# The feature
+
+Component StateDetails fetches endpoint /states/:id. Write an app.get function in server.ts that returns the specific state details along with a collection of associaled counties. Show the details and counties in StateDetails. Write new tests in apps/tests/components/StateDetails.test.tsx. Add a clause that clicks on a state and checks that state details appear in Home.test.tsx. Also, add the same clause to the Playwright tests in playwright/app.spec.ts.
+
+Also, let's add SCSS and import them in Home.tsx. The statesPanel class should be flex and divs inside it should be placed from left to right and have a limited height with a vertical scroll.
