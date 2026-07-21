@@ -46,7 +46,9 @@ test('double clicks on a state and shows highlighted states', async ({
 test('interacts with Duplicate State List', async ({ page }) => {
   await page.goto('/')
   await page.getByText('State A (100)').dblclick()
-  const duplicateState = page.getByTestId('duplicate-state-list').getByText('State A (100)')
+  const duplicateState = page
+    .getByTestId('duplicate-state-list')
+    .getByText('State A (100)')
   await expect(duplicateState).toBeVisible()
 
   await duplicateState.click()

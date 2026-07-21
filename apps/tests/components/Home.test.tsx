@@ -133,7 +133,9 @@ describe('Home Component', () => {
     })
 
     const duplicateList = screen.getByText(/Duplicate State List/i)
-    const duplicateStateItem = within(duplicateList.parentElement!).getByText('State 1 (1000)')
+    const duplicateStateItem = within(duplicateList.parentElement!).getByText(
+      'State 1 (1000)'
+    )
 
     fireEvent.click(duplicateStateItem)
     await waitFor(() => {
@@ -142,9 +144,11 @@ describe('Home Component', () => {
 
     fireEvent.click(duplicateStateItem)
     fireEvent.click(duplicateStateItem)
-    
+
     await waitFor(() => {
-      expect(screen.queryByText(/Duplicate State List/i)).not.toBeInTheDocument()
+      expect(
+        screen.queryByText(/Duplicate State List/i)
+      ).not.toBeInTheDocument()
     })
   })
 })

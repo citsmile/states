@@ -54,7 +54,7 @@ const Home = () => {
   }
 
   return (
-    <div>
+    <div className={styles.homeContainer}>
       <h1>States</h1>
       <div className={styles.statesPanel}>
         <StateList
