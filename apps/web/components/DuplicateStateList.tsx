@@ -21,13 +21,13 @@ const DuplicateStateList = ({
     <div>
       <h2>Duplicate State List</h2>
       <input
-        type='text'
-        placeholder='Search states...'
+        type="text"
+        placeholder="Search states..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-        data-testid='state-search'
+        data-testid="state-search"
       />
-      <ul data-testid='duplicate-state-list'>
+      <ul data-testid="duplicate-state-list">
         {filteredStates.map((state) => (
           <li
             key={state.id}

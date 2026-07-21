@@ -73,3 +73,7 @@ Let's add a similar test to playwright/app.spec.ts
 # Search box
 
 In DuplicateStateList.tsx there should be a search input at the top. When it is changed, it should filter the states collection by filtering out all states that do not contain the entered sequence of characters. Search should be case insensitive. Create a DuplicateStateList.test.tsx in apps/tests/components and cover the search functionality: Searching "ne" should match 'Maine' and 'Nevada' and filter out Montana.
+
+# Improvements
+
+Let's add a simple SCSS theme to the app. Please, choose simple fonts and colors that match a business web app and add them to Home.module.scss.
