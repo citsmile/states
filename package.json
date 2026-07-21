@@ -10,13 +10,15 @@
     "dev:api": "tsx apps/api/server.ts",
     "dev:web": "vite --config vite.config.ts apps/web",
     "test:unit": "vitest run apps/tests",
-    "test:e2e": "playwright test playwright",
+    "test:e2e": "dotenv -e .env.test -- playwright test playwright",
     "db:reset": "prisma migrate reset",
     "db:migrate": "prisma migrate dev",
     "db:migrate:create": "prisma migrate dev --create-only",
     "db:seed": "prisma db seed",
     "db:test:reset": "dotenv -e .env.test -- prisma migrate reset -f",
-    "db:test:migrate": "dotenv -e .env.test -- prisma migrate dev"
+    "db:test:migrate": "dotenv -e .env.test -- prisma migrate dev",
+    "build:web": "vite build",
+    "test:web": "npm run build:web && dotenv -e .env.test -- tsx apps/api/server.ts"
   },
   "keywords": [],
   "author": "",

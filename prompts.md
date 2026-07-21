@@ -45,3 +45,7 @@ The Home component should contain 3 components: StateList, DuplicateStateList, a
 Please, also add a test to Home.test.tsx that checks that states are shown (the fetch function needs to be mocked).
 
 And also in the Playwright spec let's check that states are shown (the database needs to be populated with 3 fake states in the setup section).
+
+# Production-like Playwright
+
+I want to switch Playwright to production mode. Part apps/web should be compiled as a static site. Package.json should contain test:web task that runs a the server in the mode in which calls like api/... are sent to apps/api/server.ts while all other requests are answered by the static React app. The test server should run on port 3001 and use the .env.test environment. How do we achieve this?

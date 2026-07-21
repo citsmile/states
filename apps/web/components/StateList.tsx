@@ -2,11 +2,12 @@ import { useEffect, useState } from 'react'
 
 const StateList = () => {
   const [states, setStates] = useState([])
+  const apiUrl = import.meta.env.VITE_API_URL
 
   useEffect(() => {
     const fetchStates = async () => {
       try {
-        const response = await fetch('http://localhost:3000/api/states')
+        const response = await fetch(`${apiUrl}/states`)
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`)
         }

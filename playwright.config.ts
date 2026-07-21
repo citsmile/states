@@ -5,7 +5,7 @@ export default defineConfig({
   fullyParallel: false,
   reporter: 'list',
   use: {
-    baseURL: 'http://localhost:5173',
+    baseURL: 'http://localhost:3001',
     trace: 'on-first-retry',
   },
   projects: [
@@ -15,8 +15,8 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: 'npm run dev:web',
-    url: 'http://localhost:5173',
+    command: 'npm run test:web',
+    url: 'http://localhost:3001',
     reuseExistingServer: !process.env.CI,
   },
 })

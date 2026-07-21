@@ -4,7 +4,7 @@ import path from 'path'
 
 export async function seed() {
   console.log('Seeding database...')
-  const usaStatesPath = path.join(__dirname, 'fixtures/usa-states/USA-states.json')
+  const usaStatesPath = path.resolve(process.cwd(), 'prisma/fixtures/usa-states/USA-states.json')
   const usaStatesData = JSON.parse(fs.readFileSync(usaStatesPath, 'utf-8'))
 
   for (const stateItem of usaStatesData) {
@@ -18,9 +18,9 @@ export async function seed() {
       },
     })
 
-    const countyFilePath = path.join(__dirname, 'fixtures/states', `${stateName}.json`)
+    const countyFilePath = path.resolve(process.cwd(), 'prisma/fixtures/states', `${stateName}.json`)
     if (fs.existsSync(countyFilePath)) {
-      const countyData = JSON.parse(fs.readFileSync(countyFilePath, 'utf-8'))      
+      const countyData = JSON.parse(fs.readFileSync(countyFilePath, 'utf-8'))
       const countyEntries = countyData.map((c: any) => ({
         stateId: state.id,
         name: c.county,
