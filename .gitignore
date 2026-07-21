@@ -3,3 +3,5 @@ node_modules
 .env.test
 
 /generated/prisma
+/apps/web/dist
+/test-results
