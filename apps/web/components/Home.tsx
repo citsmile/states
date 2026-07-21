@@ -14,12 +14,8 @@ const Home = () => {
       <h1>States</h1>
       <div className={styles.statesPanel}>
         <StateList onStateClick={(id) => setCurrentState(id)} />
-        {showDuplicateStateList && (
-          <DuplicateStateList/>
-        )}
-        {currentState && (
-          <StateDetails stateId={currentState} />
-        )}
+        {showDuplicateStateList && <DuplicateStateList />}
+        {currentState && <StateDetails stateId={currentState} />}
       </div>
     </div>
   )

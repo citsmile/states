@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 3000
 
 const corsOptions = {
   origin: process.env.CORS_ORIGIN || '*',
-  optionsSuccessStatus: 200
+  optionsSuccessStatus: 200,
 }
 
 app.use(cors(corsOptions))

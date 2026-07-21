@@ -41,7 +41,10 @@ const StateDetails = ({ stateId }: { stateId: number | null }) => {
 
   if (!state) return <div>Loading...</div>
 
-  const sumOfCountyPopulation = state.counties.reduce((sum, county) => sum + county.population, 0)
+  const sumOfCountyPopulation = state.counties.reduce(
+    (sum, county) => sum + county.population,
+    0
+  )
 
   const populationMatches = sumOfCountyPopulation === state.population
   const populationMatchText = populationMatches ? 'Yes' : 'No'
@@ -52,7 +55,10 @@ const StateDetails = ({ stateId }: { stateId: number | null }) => {
       <h3>State population: {state.population}</h3>
       <p>Counties: {state.counties.length}</p>
       <p>Sum of county population: {sumOfCountyPopulation}</p>
-      <p>Total population matches the sum of county population: {populationMatchText}</p>
+      <p>
+        Total population matches the sum of county population:{' '}
+        {populationMatchText}
+      </p>
       <ul>
         {state.counties.map((county) => (
           <li key={county.id}>

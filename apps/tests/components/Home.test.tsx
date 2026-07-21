@@ -31,7 +31,9 @@ describe('Home Component', () => {
     render(<Home />)
     for (const state of mockStates) {
       await waitFor(() => {
-        expect(screen.getByText(new RegExp(`${state.name}.*${state.population}`))).toBeInTheDocument()
+        expect(
+          screen.getByText(new RegExp(`${state.name}.*${state.population}`))
+        ).toBeInTheDocument()
       })
     }
   })
@@ -43,8 +45,9 @@ describe('Home Component', () => {
       population: 1000,
       counties: [{ id: 1, name: 'County 1', population: 500 }],
     }
-    
-    global.fetch = vi.fn()
+
+    global.fetch = vi
+      .fn()
       .mockResolvedValueOnce({
         ok: true,
         json: vi.fn().mockResolvedValue(mockStates),
@@ -55,13 +58,15 @@ describe('Home Component', () => {
       })
 
     render(<Home />)
-    
+
     const stateElement = await screen.findByText(/State 1 \(1000\)/i)
     stateElement.click()
-    
+
     await waitFor(() => {
       expect(screen.getByText(/State 1 Details/i)).toBeInTheDocument()
-      expect(screen.getByText(/County 1 - Population: 500/i)).toBeInTheDocument()
+      expect(
+        screen.getByText(/County 1 - Population: 500/i)
+      ).toBeInTheDocument()
     })
   })
 })
