@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useDoubleClick } from '@/hooks/useDoubleClick'
 
 const DuplicateStateList = ({
@@ -9,13 +10,25 @@ const DuplicateStateList = ({
   onSingleClick: (id: number) => void
   onDblClick: (id: number) => void
 }) => {
+  const [searchTerm, setSearchTerm] = useState('')
   const { handleClick } = useDoubleClick(onSingleClick, onDblClick)
+
+  const filteredStates = states.filter((state) =>
+    state.name.toLowerCase().includes(searchTerm.toLowerCase())
+  )
 
   return (
     <div>
       <h2>Duplicate State List</h2>
+      <input
+        type='text'
+        placeholder='Search states...'
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        data-testid='state-search'
+      />
       <ul data-testid='duplicate-state-list'>
-        {states.map((state) => (
+        {filteredStates.map((state) => (
           <li
             key={state.id}
             onClick={() => handleClick(state.id)}

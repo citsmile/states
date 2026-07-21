@@ -69,3 +69,7 @@ Add a test to playwright/app.spec.ts that double clicks on a state and opens hig
 Let's add another test to Home.test.tsx that verifies single click (component StateDetails opens) and double click (Highlighted states are toggled) made on Duplicate State List.
 
 Let's add a similar test to playwright/app.spec.ts
+
+# Search box
+
+In DuplicateStateList.tsx there should be a search input at the top. When it is changed, it should filter the states collection by filtering out all states that do not contain the entered sequence of characters. Search should be case insensitive. Create a DuplicateStateList.test.tsx in apps/tests/components and cover the search functionality: Searching "ne" should match 'Maine' and 'Nevada' and filter out Montana.
