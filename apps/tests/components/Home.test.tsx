@@ -1,4 +1,10 @@
-import { render, screen, waitFor } from '@testing-library/react'
+import {
+  render,
+  screen,
+  waitFor,
+  fireEvent,
+  within,
+} from '@testing-library/react'
 import { vi, beforeEach, describe, it, expect, afterEach } from 'vitest'
 import Home from '@/components/Home'
 
@@ -67,6 +73,33 @@ describe('Home Component', () => {
       expect(
         screen.getByText(/County 1 - Population: 500/i)
       ).toBeInTheDocument()
+    })
+  })
+
+  it('double clicking a state highlights it and does not open details', async () => {
+    render(<Home />)
+    const stateElements = await screen.findAllByText(/State 1 \(1000\)/i)
+    const stateElement = stateElements[0]
+
+    fireEvent.click(stateElement)
+    fireEvent.click(stateElement)
+
+    await waitFor(() => {
+      const duplicateList = screen.getByText(/Duplicate State List/i)
+      expect(
+        within(duplicateList.parentElement!).getByText(/State 1 \(1000\)/i)
+      ).toBeInTheDocument()
+    })
+
+    expect(screen.queryByText(/Details/i)).not.toBeInTheDocument()
+
+    fireEvent.click(stateElement)
+    fireEvent.click(stateElement)
+
+    await waitFor(() => {
+      expect(
+        screen.queryByText(/Duplicate State List/i)
+      ).not.toBeInTheDocument()
     })
   })
 })

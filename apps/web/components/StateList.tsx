@@ -1,43 +1,51 @@
 import { useEffect, useState } from 'react'
 
 const StateList = ({
+  states,
   onStateClick,
+  onStateHighlight,
 }: {
+  states: { id: number; name: string; population: number }[]
   onStateClick: (id: number) => void
+  onStateHighlight: (id: number) => void
 }) => {
-  const [states, setStates] = useState([])
-  const apiUrl = import.meta.env.VITE_API_URL
+  const [currentId, setCurrentId] = useState<number | null>(null)
+  const [clicks, setClicks] = useState<number>(0)
 
   useEffect(() => {
-    const fetchStates = async () => {
-      try {
-        const response = await fetch(`${apiUrl}/states`)
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`)
-        }
-        const data = await response.json()
-        setStates(data)
-      } catch (error) {
-        console.error('Error fetching states:', error)
-      }
+    if (clicks == 1) {
+      const timer = setTimeout(() => {
+        if (currentId) onStateClick(currentId)
+        setClicks(0)
+      }, 200)
+      return () => clearTimeout(timer)
     }
+    if (clicks == 2) {
+      if (currentId) onStateHighlight(currentId)
+      setClicks(0)
+    }
+  }, [clicks])
 
-    fetchStates()
-  }, [])
+  const handleClick = (id: number) => {
+    setCurrentId(id)
+    setClicks(clicks + 1)
+  }
 
   return (
     <div>
       <h2>State List</h2>
       <ul>
-        {states.map((state: any) => (
-          <li
-            key={state.id}
-            onClick={() => onStateClick(state.id)}
-            style={{ cursor: 'pointer' }}
-          >
-            {state.name} ({state.population})
-          </li>
-        ))}
+        {states.map(
+          (state: { id: number; name: string; population: number }) => (
+            <li
+              key={state.id}
+              onClick={() => handleClick(state.id)}
+              style={{ cursor: 'pointer' }}
+            >
+              {state.name} ({state.population})
+            </li>
+          )
+        )}
       </ul>
     </div>
   )

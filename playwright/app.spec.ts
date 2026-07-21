@@ -31,3 +31,16 @@ test('clicks on a state and shows details', async ({ page }) => {
   await page.getByText('State A (100)').click()
   await expect(page.getByText('State A Details')).toBeVisible()
 })
+
+test('double clicks on a state and shows highlighted states', async ({
+  page,
+}) => {
+  await page.goto('/')
+  await page.getByText('State A (100)').dblclick()
+  await expect(page.getByText('Duplicate State List')).toBeVisible()
+  await expect(
+    page.locator(
+      'h2:has-text("Duplicate State List") + ul >> text=State A (100)'
+    )
+  ).toBeVisible()
+})

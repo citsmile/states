@@ -57,3 +57,9 @@ I want to switch Playwright to production mode. Part apps/web should be compiled
 Component StateDetails fetches endpoint /states/:id. Write an app.get function in server.ts that returns the specific state details along with a collection of associaled counties. Show the details and counties in StateDetails. Write new tests in apps/tests/components/StateDetails.test.tsx. Add a clause that clicks on a state and checks that state details appear in Home.test.tsx. Also, add the same clause to the Playwright tests in playwright/app.spec.ts.
 
 Also, let's add SCSS and import them in Home.tsx. The statesPanel class should be flex and divs inside it should be placed from left to right and have a limited height with a vertical scroll.
+
+# Double click handling (the feature was added manually, the prompt is as follows)
+
+When a user double clicks on a state, the state is added to a list of highlighted and shown in the middle component. When it is double clicked for the second time, it is removed from highlighted. Please, write tests in Home.test.tsx for the case. Separately, test that double click does not open the state details panel.
+
+Add a test to playwright/app.spec.ts that double clicks on a state and opens highlighted states.
