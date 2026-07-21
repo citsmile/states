@@ -25,3 +25,9 @@ test('shows states', async ({ page }) => {
   await expect(page.getByText('State B (200)')).toBeVisible()
   await expect(page.getByText('State C (300)')).toBeVisible()
 })
+
+test('clicks on a state and shows details', async ({ page }) => {
+  await page.goto('/')
+  await page.getByText('State A (100)').click()
+  await expect(page.getByText('State A Details')).toBeVisible()
+})

@@ -1,0 +1,13 @@
+.statesPanel {
+  display: flex;
+  flex-direction: row;
+  height: 700px;
+
+  div {
+    flex: 1;
+    margin: 10px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    overflow-y: auto;
+  }
+}
