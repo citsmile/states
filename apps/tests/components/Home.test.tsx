@@ -1,4 +1,10 @@
-import { render, screen, waitFor } from '@testing-library/react'
+import {
+  render,
+  screen,
+  waitFor,
+  fireEvent,
+  within,
+} from '@testing-library/react'
 import { vi, beforeEach, describe, it, expect, afterEach } from 'vitest'
 import Home from '@/components/Home'
 
@@ -67,6 +73,78 @@ describe('Home Component', () => {
       expect(
         screen.getByText(/County 1 - Population: 500/i)
       ).toBeInTheDocument()
+    })
+  })
+
+  it('double clicking a state highlights it and does not open details', async () => {
+    render(<Home />)
+    const stateElements = await screen.findAllByText(/State 1 \(1000\)/i)
+    const stateElement = stateElements[0]
+
+    fireEvent.click(stateElement)
+    fireEvent.click(stateElement)
+
+    await waitFor(() => {
+      const duplicateList = screen.getByText(/Duplicate State List/i)
+      expect(
+        within(duplicateList.parentElement!).getByText(/State 1 \(1000\)/i)
+      ).toBeInTheDocument()
+    })
+
+    expect(screen.queryByText(/Details/i)).not.toBeInTheDocument()
+
+    fireEvent.click(stateElement)
+    fireEvent.click(stateElement)
+
+    await waitFor(() => {
+      expect(
+        screen.queryByText(/Duplicate State List/i)
+      ).not.toBeInTheDocument()
+    })
+  })
+
+  it('interacts with Duplicate State List', async () => {
+    const mockStateDetails = {
+      id: 1,
+      name: 'State 1',
+      population: 1000,
+      counties: [{ id: 1, name: 'County 1', population: 500 }],
+    }
+
+    global.fetch = vi
+      .fn()
+      .mockResolvedValueOnce({
+        ok: true,
+        json: vi.fn().mockResolvedValue(mockStates),
+      })
+      .mockResolvedValueOnce({
+        ok: true,
+        json: vi.fn().mockResolvedValue(mockStateDetails),
+      })
+
+    render(<Home />)
+    const stateElement = await screen.findByText(/State 1 \(1000\)/i)
+
+    fireEvent.click(stateElement)
+    fireEvent.click(stateElement)
+
+    await waitFor(() => {
+      expect(screen.getByText(/Duplicate State List/i)).toBeInTheDocument()
+    })
+
+    const duplicateList = screen.getByText(/Duplicate State List/i)
+    const duplicateStateItem = within(duplicateList.parentElement!).getByText('State 1 (1000)')
+
+    fireEvent.click(duplicateStateItem)
+    await waitFor(() => {
+      expect(screen.getByText(/State 1 Details/i)).toBeInTheDocument()
+    })
+
+    fireEvent.click(duplicateStateItem)
+    fireEvent.click(duplicateStateItem)
+    
+    await waitFor(() => {
+      expect(screen.queryByText(/Duplicate State List/i)).not.toBeInTheDocument()
     })
   })
 })
