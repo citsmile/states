@@ -39,8 +39,18 @@ test('double clicks on a state and shows highlighted states', async ({
   await page.getByText('State A (100)').dblclick()
   await expect(page.getByText('Duplicate State List')).toBeVisible()
   await expect(
-    page.locator(
-      'h2:has-text("Duplicate State List") + ul >> text=State A (100)'
-    )
+    page.getByTestId('duplicate-state-list').getByText('State A (100)')
   ).toBeVisible()
+})
+
+test('interacts with Duplicate State List', async ({ page }) => {
+  await page.goto('/')
+  await page.getByText('State A (100)').dblclick()
+  const duplicateState = page.getByTestId('duplicate-state-list').getByText('State A (100)')
+  await expect(duplicateState).toBeVisible()
+
+  await duplicateState.click()
+  await expect(page.getByText('State A Details')).toBeVisible()
+  await duplicateState.dblclick()
+  await expect(duplicateState).not.toBeVisible()
 })

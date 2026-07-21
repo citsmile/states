@@ -1,35 +1,15 @@
-import { useEffect, useState } from 'react'
+import { useDoubleClick } from '@/hooks/useDoubleClick'
 
 const StateList = ({
   states,
-  onStateClick,
-  onStateHighlight,
+  onSingleClick,
+  onDblClick,
 }: {
   states: { id: number; name: string; population: number }[]
-  onStateClick: (id: number) => void
-  onStateHighlight: (id: number) => void
+  onSingleClick: (id: number) => void
+  onDblClick: (id: number) => void
 }) => {
-  const [currentId, setCurrentId] = useState<number | null>(null)
-  const [clicks, setClicks] = useState<number>(0)
-
-  useEffect(() => {
-    if (clicks == 1) {
-      const timer = setTimeout(() => {
-        if (currentId) onStateClick(currentId)
-        setClicks(0)
-      }, 200)
-      return () => clearTimeout(timer)
-    }
-    if (clicks == 2) {
-      if (currentId) onStateHighlight(currentId)
-      setClicks(0)
-    }
-  }, [clicks])
-
-  const handleClick = (id: number) => {
-    setCurrentId(id)
-    setClicks(clicks + 1)
-  }
+  const { handleClick } = useDoubleClick(onSingleClick, onDblClick)
 
   return (
     <div>

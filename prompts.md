@@ -63,3 +63,9 @@ Also, let's add SCSS and import them in Home.tsx. The statesPanel class should b
 When a user double clicks on a state, the state is added to a list of highlighted and shown in the middle component. When it is double clicked for the second time, it is removed from highlighted. Please, write tests in Home.test.tsx for the case. Separately, test that double click does not open the state details panel.
 
 Add a test to playwright/app.spec.ts that double clicks on a state and opens highlighted states.
+
+# Click on double click handling (the feature was added manually)
+
+Let's add another test to Home.test.tsx that verifies single click (component StateDetails opens) and double click (Highlighted states are toggled) made on Duplicate State List.
+
+Let's add a similar test to playwright/app.spec.ts

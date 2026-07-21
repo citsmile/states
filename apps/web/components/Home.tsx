@@ -59,11 +59,15 @@ const Home = () => {
       <div className={styles.statesPanel}>
         <StateList
           states={states}
-          onStateClick={(id) => setCurrentState(id)}
-          onStateHighlight={(id) => highlightState(id)}
+          onSingleClick={(id) => setCurrentState(id)}
+          onDblClick={(id) => highlightState(id)}
         />
         {showDuplicateStateList && (
-          <DuplicateStateList states={highlightedStates} />
+          <DuplicateStateList
+            states={highlightedStates}
+            onSingleClick={(id) => setCurrentState(id)}
+            onDblClick={(id) => highlightState(id)}
+          />
         )}
         {currentState && <StateDetails stateId={currentState} />}
       </div>
