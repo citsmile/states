@@ -1,6 +1,10 @@
 import { useEffect, useState } from 'react'
 
-const StateList = ({ onStateClick }: { onStateClick: (id: number) => void }) => {
+const StateList = ({
+  onStateClick,
+}: {
+  onStateClick: (id: number) => void
+}) => {
   const [states, setStates] = useState([])
   const apiUrl = import.meta.env.VITE_API_URL
 
@@ -26,7 +30,11 @@ const StateList = ({ onStateClick }: { onStateClick: (id: number) => void }) => 
       <h2>State List</h2>
       <ul>
         {states.map((state: any) => (
-          <li key={state.id} onClick={() => onStateClick(state.id)} style={{ cursor: 'pointer' }}>
+          <li
+            key={state.id}
+            onClick={() => onStateClick(state.id)}
+            style={{ cursor: 'pointer' }}
+          >
             {state.name} ({state.population})
           </li>
         ))}

@@ -43,15 +43,25 @@ describe('StateDetails Component', () => {
 
   it('fetches and displays state details', async () => {
     render(<StateDetails stateId={1} />)
-    
+
     await waitFor(() => {
       expect(screen.getByText(/Test State Details/i)).toBeInTheDocument()
       expect(screen.getByText(/State population: 1000/i)).toBeInTheDocument()
       expect(screen.getByText(/Counties: 2/i)).toBeInTheDocument()
-      expect(screen.getByText(/Sum of county population: 1000/i)).toBeInTheDocument()
-      expect(screen.getByText(/Total population matches the sum of county population: Yes/i)).toBeInTheDocument()
-      expect(screen.getByText(/County 1 - Population: 500/i)).toBeInTheDocument()
-      expect(screen.getByText(/County 2 - Population: 500/i)).toBeInTheDocument()
+      expect(
+        screen.getByText(/Sum of county population: 1000/i)
+      ).toBeInTheDocument()
+      expect(
+        screen.getByText(
+          /Total population matches the sum of county population: Yes/i
+        )
+      ).toBeInTheDocument()
+      expect(
+        screen.getByText(/County 1 - Population: 500/i)
+      ).toBeInTheDocument()
+      expect(
+        screen.getByText(/County 2 - Population: 500/i)
+      ).toBeInTheDocument()
     })
   })
 
@@ -62,15 +72,25 @@ describe('StateDetails Component', () => {
     })
 
     render(<StateDetails stateId={2} />)
-    
+
     await waitFor(() => {
       expect(screen.getByText(/Alabama Details/i)).toBeInTheDocument()
       expect(screen.getByText(/State population: 1000/i)).toBeInTheDocument()
       expect(screen.getByText(/Counties: 2/i)).toBeInTheDocument()
-      expect(screen.getByText(/Sum of county population: 800/i)).toBeInTheDocument()
-      expect(screen.getByText(/Total population matches the sum of county population: No/i)).toBeInTheDocument()
-      expect(screen.getByText(/County 1 - Population: 200/i)).toBeInTheDocument()
-      expect(screen.getByText(/County 2 - Population: 600/i)).toBeInTheDocument()
+      expect(
+        screen.getByText(/Sum of county population: 800/i)
+      ).toBeInTheDocument()
+      expect(
+        screen.getByText(
+          /Total population matches the sum of county population: No/i
+        )
+      ).toBeInTheDocument()
+      expect(
+        screen.getByText(/County 1 - Population: 200/i)
+      ).toBeInTheDocument()
+      expect(
+        screen.getByText(/County 2 - Population: 600/i)
+      ).toBeInTheDocument()
     })
   })
 })
