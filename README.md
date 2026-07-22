@@ -14,6 +14,11 @@ Github Copilot in the Auto mode was used for auto-complete
 
 Run the following commands:
 
+- cp .env.example .env
+- cp .env.test.example .env.test
+
+Edit DATABASE_URL in .env and .env.test to match your PG configuration. Then run:
+
 - npm install
 - npm run db:reset
 - npm run db:migrate
@@ -42,3 +47,13 @@ Run the following commands:
 - npm run dev:web
 
 Open browser at http://localhost:5173
+
+# Running the Docker image
+
+## How to Use:
+
+- **Ensure you have a `.env` file:** Make sure your `.env` file (containing necessary secrets/configurations like `DATABASE_URL`) is present in the root directory.
+- **Start the container:** Run `npm run docker:up` in your terminal.
+- **Seed the database with:**_ `docker compose exec app npm run db:seed`
+- **Check the application:** Open `http://localhost:3000` in your web browser to verify the app is running.
+- **Stop and clean up:** When done, run `npm run docker:down` to stop and remove the container.
