@@ -50,5 +50,4 @@ COPY prisma.config.ts ./
 EXPOSE 3000
 
 # Run migrations, seed, and start server
-# CMD ["sh", "-c", "exec npx tsx apps/api/server.ts"]
 CMD ["sh", "-c", "npx prisma migrate deploy && exec npx tsx apps/api/server.ts"]

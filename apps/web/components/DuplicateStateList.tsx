@@ -10,7 +10,7 @@ const DuplicateStateList = ({
   onSingleClick: (id: number) => void
   onDblClick: (id: number) => void
 }) => {
-  const [searchTerm, setSearchTerm] = useState('')
+  const [searchTerm, setSearchTerm] = useState<string>('')
   const { handleClick } = useDoubleClick(onSingleClick, onDblClick)
 
   const filteredStates = states.filter((state) =>

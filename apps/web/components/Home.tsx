@@ -15,7 +15,7 @@ const Home = () => {
   const [states, setStates] = useState<State[]>([])
   const [highlightedStates, setHighlightedStates] = useState<State[]>([])
   const [currentState, setCurrentState] = useState<number | null>(null)
-  const [showDuplicateStateList, setShowDuplicateStateList] = useState(false)
+  const [showDuplicateStateList, setShowDuplicateStateList] = useState<boolean>(false)
   const apiUrl = import.meta.env.VITE_API_URL
 
   useEffect(() => {
